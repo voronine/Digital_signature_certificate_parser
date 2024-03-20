@@ -1,0 +1,122 @@
+.container {
+  display: flex;
+}
+
+table {
+  border-collapse: collapse;
+  display: table-cell;
+}
+
+.leftPart, .rightPart {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightPart {
+  margin-top: 50px;
+  height: 200px;
+}
+
+.certificatInfo {
+  height: 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.certificatInfo:hover {
+  background-color: lightgray;
+}
+
+.selectedRow {
+  background-color: #e0e0e0;
+}
+
+.certificatInfo span {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.certificatInfo span:last-child {
+  float: right;
+}
+
+.label {
+  width: 60%;
+  height: 50px;
+  background-color: #fff;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.drag_Drop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-direction: column;
+  border: 1px dotted black;
+  border-radius: 5px;
+  width: 90%;
+  height: 100%;
+  padding: 50px 0;
+}
+
+.addButton {
+  margin: 30px 100px;
+  display: block;
+  width: 10em;
+  height: 2.5em;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #fff;
+  }
+
+  &:active {
+    background-color: beige;
+  }
+}
+
+.textDrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.labelDrog {
+  display: none;
+}
+
+.labelDrop {
+  width: 100%;
+  height: 100%;
+}
+
+.informationWindow {
+  width: 100%;
+}
+
+.selectedCertificate {
+  font-size: 20px;
+  margin-top: 50px;
+  padding: 30px;
+  border: 1px solid black;
+  width: 70%;
+
+}
+
+.flex {
+  display: flex;
+}
+
+.flex1{
+  flex :1;
+}
