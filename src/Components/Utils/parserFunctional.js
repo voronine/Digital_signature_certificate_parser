@@ -1,4 +1,6 @@
 import { decode } from '@lapo/asn1js';
+import { findValuesByNumber } from './findByValues';
+import { findAndPrintDateTime } from './findByData';
 
 function parseASN1Object(asn1Object) {
   if (asn1Object.typeName() !== 'SEQUENCE' && !asn1Object.sub) {
@@ -28,40 +30,6 @@ export function parseCertificate(certificateData) {
   const parsedCertificate = parseASN1Object(decodedData);
 
   return parsedCertificate;
-}
-
-export function findValuesByNumber(parsedCertificate, number, resultArray = []) {
-  for (const key in parsedCertificate) {
-      if (parsedCertificate.hasOwnProperty(key)) {
-          const value = parsedCertificate[key];
-          if (typeof value === 'object' && value !== null) {
-              findValuesByNumber(value, number, resultArray);
-          } else if (key === '0' && value.trim().startsWith(number)) {
-              if ('1' in parsedCertificate) {
-                  resultArray.push(parsedCertificate['1']);
-              }
-          }
-      }
-  }
-  return resultArray;
-}
-
-
-function isDateTimeString(str) {
-  const dateTimeRegex = /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} UTC$/;
-  return dateTimeRegex.test(str.trim());
-}
-
-function findAndPrintDateTime(obj) {
-  let dates = [];
-  for (let key in obj) {
-      if (typeof obj[key] === 'object') {
-          dates = dates.concat(findAndPrintDateTime(obj[key]));
-      } else if (typeof obj[key] === 'string' && isDateTimeString(obj[key])) {
-          dates.push(obj[key].substring(0, 10));
-      }
-  }
-  return dates;
 }
 
 export function getCertificateInfo(data) {

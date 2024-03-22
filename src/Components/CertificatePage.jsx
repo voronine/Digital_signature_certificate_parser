@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
 import { getCertificateInfo } from './Utils/parserFunctional';
 import { handleFile } from './Utils/fileReader';
+import { CertificateInfo } from './CertificateInfo';
 
 const CertificatesPage = () => {
   const [certificates, setCertificates] = useState([]);
@@ -46,7 +47,7 @@ const CertificatesPage = () => {
     }
   }, []);
 
-const certificateInfo = getCertificateInfo(selectedCertificate);
+// const certificateInfo = getCertificateInfo(selectedCertificate);
   
 
   return (
@@ -100,26 +101,21 @@ const certificateInfo = getCertificateInfo(selectedCertificate);
                 className={styles.labelDrog}
               />
               <div className={styles.textDrop}>
-              <p>Перетягніть файл сертифікату сюди </p>
-              <p>або</p>
-             </div>
+                <p>Перетягніть файл сертифікату сюди </p>
+                <p>або</p>
+              </div>
             </label>
             <label className={styles.label} htmlFor="file">
               <span>Виберіть через стандартний діалог</span>
             </label>
           </div>
         ) : (
-            <div className={styles.informationWindow}>
-              {selectedCertificate &&
-                <div className={styles.selectedCertificate}>
-                  <p><b>Common Name:</b> {certificateInfo?.commonName}</p>
-                  <p><b>Issuer CN:</b> {certificateInfo?.issuerName}</p>
-                  <p><b>Valid From:</b> {certificateInfo?.validityStartDate}</p>
-                  <p><b>Valid To:</b> {certificateInfo?.validityEndDate}</p>
-                </div>
-              }
-            </div>
-          )}
+          selectedCertificate && (
+            <CertificateInfo
+              certificatInfo={selectedCertificate}
+            />
+          )
+        )}
       </div>
     </div>
   );
