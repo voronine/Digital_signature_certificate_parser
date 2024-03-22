@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
-import { getCertificateInfo } from './Utils/parserFunctional';
 import { handleFile } from './Utils/fileReader';
 import { CertificateInfo } from './CertificateInfo';
+import { CertificatsTable } from './CertificatsTable';
 
 const CertificatesPage = () => {
   const [certificates, setCertificates] = useState([]);
@@ -15,12 +15,6 @@ const CertificatesPage = () => {
 
   const handleAddButtonClick = () => {
     setIsPress(!isPress);
-  };
-
-  const handleCertificateClick = (certificate, index) => {
-    setIsPress(false);
-    setSelectedCertificate(certificate);
-    setSelectedCertificateIndex(index);
   };
 
   const handleDragOver = (e) => {
@@ -36,6 +30,12 @@ const CertificatesPage = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     handleFile(file,certificates, setCertificates);
+  };
+
+  const handleCertificateClick = (certificate, index) => {
+    setIsPress(false);
+    setSelectedCertificate(certificate);
+    setSelectedCertificateIndex(index);
   };
 
   useEffect(() => {
@@ -56,22 +56,11 @@ const CertificatesPage = () => {
          {certificates.length !== 0 ? (
           <table>
             <tbody>
-              {certificates?.map((certificate, index) => {
-                const certificateInfo = getCertificateInfo(certificate);
-                const isSelected = index === selectedCertificateIndex;
-                return (
-                  <tr
-                    key={index + 1}
-                    onClick={() => handleCertificateClick(certificate, index)}
-                    className={isSelected ? styles.selectedRow : null}
-                  >
-                    <td className={styles.certificatInfo}>
-                    <span>{certificateInfo.commonName}</span>
-                    <span>&gt;</span>
-                    </td>
-                </tr>
-                )
-              })}
+              <CertificatsTable
+                certificates={certificates}
+                handleCertificateClick={handleCertificateClick}
+                selectedCertificateIndex={selectedCertificateIndex}
+              />
             </tbody>
           </table>
         ) : (
