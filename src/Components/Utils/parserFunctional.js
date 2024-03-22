@@ -21,7 +21,7 @@ export function parseCertificate(certificateData) {
   const result = decode(certData);
 
   if (result.typeName() !== 'SEQUENCE') {
-    throw 'Неправильна структура сертифіката (ожидается SEQUENCE)';
+    throw new Error('Невірна структура сертифікату (очікується SEQUENCE)');
   }
 
   const tbsCertificate = result;

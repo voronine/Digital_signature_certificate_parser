@@ -45,10 +45,7 @@ const CertificatesPage = () => {
     if (storedCertificates) {
       setCertificates(JSON.parse(storedCertificates));
     }
-  }, []);
-
-// const certificateInfo = getCertificateInfo(selectedCertificate);
-  
+  }, []);  
 
   return (
     <div className={styles.container}>
