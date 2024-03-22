@@ -25,9 +25,7 @@ const CertificatesPage = () => {
     e.preventDefault();
   };
   
-  const handleDrop = (e) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files[0];
+  const handleFile = (file) => {
     const reader = new FileReader();
   
     reader.onload = (e) => {
@@ -35,7 +33,7 @@ const CertificatesPage = () => {
   
       try {
         const parsedCertificate = parseCertificate(certificateData);
-        const isDuplicate = certificates.find(cert => {
+        const isDuplicate = certificates.find((cert) => {
           return JSON.stringify(cert) === JSON.stringify(parsedCertificate);
         });
   
@@ -53,32 +51,16 @@ const CertificatesPage = () => {
   
     reader.readAsArrayBuffer(file);
   };
-
+  
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    handleFile(file);
+  };
+  
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const certificateData = e.target.result;
-  
-      try {
-        const parsedCertificate = parseCertificate(certificateData);
-        const isDuplicate = certificates.find(cert => {
-          return JSON.stringify(cert) === JSON.stringify(parsedCertificate);
-        });
-  
-        if (!isDuplicate) {
-          const updatedCertificates = [...certificates, parsedCertificate];
-          setCertificates(updatedCertificates);
-          localStorage.setItem('certificates', JSON.stringify(updatedCertificates));
-        } else {
-          alert('Такой сертификат уже существует в списке.');
-        }
-      } catch (error) {
-        console.error('Не удалось распарсить сертификат:', error);
-      }
-    };
-  
-    reader.readAsArrayBuffer(file);
+    handleFile(file);
   };
 
   useEffect(() => {
