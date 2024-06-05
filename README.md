@@ -16,10 +16,8 @@ Developed a component for displaying brief information about a certificate.
 Implemented saving certificates in LocalStorage.
 Added drag-and-drop functionality for adding new certificates.
 Ensured loading and displaying saved certificates upon page reload.
-
-
-https://digitalsignaturecertificatepar-1op0--3000--810981ba.local-credentialless.webcontainer.io/
-
+[
+https://digitalsignaturecertificatepar-1op0--3000--810981ba.local-credentialless.webcontainer.io/](https://stackblitz.com/~/github.com/voronine/Digital_signature_certificate_parser)
 
 certificates for verification:
 [https://stackblitz.com/](https://www.dropbox.com/s/n8903g4cvzrmqro/test_certs.zip?dl=1)
